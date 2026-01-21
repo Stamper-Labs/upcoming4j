@@ -1,0 +1,53 @@
+# Gradle
+/.gradle/
+/build/
+
+# IntelliJ IDEA
+/.idea/
+/*.iml
+*.iws
+/out/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs and runtime files
+*.log
+logs/
+tmp/
+*.tmp
+
+# Test / reports / coverage
+/build/test-results/
+/build/reports/
+coverage/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# Compiled class files and jars
+*.class
+*.jar
+*.war
+*.ear
+
+# Packages
+*.zip
+*.tar.gz
+*.rar
+
+# Local environment and secrets
+.env
+local.properties
+secrets.properties
+
+# Misc
+Thumbs.db
+.idea_modules/
