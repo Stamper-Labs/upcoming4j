@@ -24,12 +24,6 @@ gradlePlugin {
     }
 }
 
-// Make sure tests use JUnit 5
 tasks.named('test') {
     useJUnitPlatform()
-}
-
-// Optional: enable annotation processing for Java compile tasks
-tasks.withType(JavaCompile) {
-    options.annotationProcessorPath = configurations.annotationProcessor
 }
