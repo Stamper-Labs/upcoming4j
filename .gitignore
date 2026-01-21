@@ -51,3 +51,5 @@ secrets.properties
 # Misc
 Thumbs.db
 .idea_modules/
+
+/plugin/build/
