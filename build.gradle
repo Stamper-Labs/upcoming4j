@@ -1,9 +1,13 @@
 plugins {
     id 'java-gradle-plugin'
     id 'com.diffplug.spotless' version '6.25.0'
+    id 'org.jreleaser' version '1.22.0'
 }
 
-apply from: '../gradle/spotless.gradle'
+apply from: 'gradle/jreleaser.gradle'
+apply from: 'gradle/spotless.gradle'
+
+version = '0.2.0'
 
 repositories {
     mavenCentral()
@@ -15,6 +19,7 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:5.5.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.5.0'
 }
+
 gradlePlugin {
     plugins {
         greeting {
