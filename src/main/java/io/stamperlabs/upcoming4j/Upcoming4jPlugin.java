@@ -12,31 +12,26 @@ public class Upcoming4jPlugin implements Plugin<Project> {
 
   @Override
   public void apply(Project project) {
-    var nextVersionProvider =
-        project.provider(
-            () -> {
-              this.checkGitProject(project);
-              ProcessBuilder gitFetchProcessBuilder =
-                  GitProcessBuilderFactory.fetchTags(project.getRootDir());
-              ProcessBuilder gitForEachRefProcessBuilder =
-                  GitProcessBuilderFactory.latestTag(project.getRootDir());
+    project.getLogger().lifecycle("Upcoming4j plugin has been applied");
+    this.checkGitProject(project);
+    ProcessBuilder gitFetchProcessBuilder =
+        GitProcessBuilderFactory.fetchTags(project.getRootDir());
+    ProcessBuilder gitForEachRefProcessBuilder =
+        GitProcessBuilderFactory.latestTag(project.getRootDir());
 
-              var latestGitTagService =
-                  new LatestGitTagService(
-                      gitFetchProcessBuilder, gitForEachRefProcessBuilder, project);
-              String gitTag = latestGitTagService.retrieve();
+    var latestGitTagService =
+        new LatestGitTagService(gitFetchProcessBuilder, gitForEachRefProcessBuilder, project);
+    String gitTag = latestGitTagService.retrieve();
 
-              ProcessBuilder gitLogProcessBuilder =
-                  GitProcessBuilderFactory.logSinceTag(project.getRootDir(), gitTag);
-              var commitsSinceTagService =
-                  new CommitsSinceTag(gitLogProcessBuilder, project, gitTag);
-              var commitHistory = commitsSinceTagService.retrieve();
+    ProcessBuilder gitLogProcessBuilder =
+        GitProcessBuilderFactory.logSinceTag(project.getRootDir(), gitTag);
+    var commitsSinceTagService = new CommitsSinceTag(gitLogProcessBuilder, project, gitTag);
+    var commitHistory = commitsSinceTagService.retrieve();
 
-              var nextVersionService = new NextVersion(project);
-              return nextVersionService.compute(gitTag, commitHistory);
-            });
+    var nextVersionService = new NextVersion(project);
+    var nextVersion = nextVersionService.compute(gitTag, commitHistory);
 
-    project.getExtensions().getExtraProperties().set("nextVersion", nextVersionProvider);
+    project.getExtensions().getExtraProperties().set("nextVersion", nextVersion);
   }
 
   private void checkGitProject(Project project) {
