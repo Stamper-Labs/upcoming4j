@@ -4,35 +4,34 @@ plugins {
     id 'maven-publish'
     id 'com.diffplug.spotless' version '6.25.0'
     id 'org.jreleaser' version '1.22.0'
+    id 'com.gradle.plugin-publish' version '2.0.0'
 }
 
-gradle.projectsEvaluated {
-    apply from: 'gradle/jreleaser.gradle'
+group = 'com.stamperlabs.upcoming4j'
+version = '0.0.2'
+
+gradlePlugin {
+    vcsUrl = 'https://github.com/Stamper-Labs/upcoming4j'
+    plugins {
+        greeting {
+            id = 'com.stamperlabs.upcoming4j'
+            displayName = 'Upcoming4j Gradle Plugin'
+            description = 'Compute the next semantic version based on conventional commits'
+            tags.set(['semantic-versioning', 'conventional-commits', 'gradle', 'plugins', 'versioning'])
+            implementationClass = 'com.stamperlabs.upcoming4j.Upcoming4jPlugin'
+        }
+    }
 }
-apply from: 'gradle/spotless.gradle'
 
 repositories {
     mavenCentral()
 }
-
-group = 'com.stamperlabs.upcoming4j'
-version = '0.0.1'
 
 dependencies {
     testImplementation libs.spock.core
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-gradlePlugin {
-    plugins {
-        greeting {
-            id = 'com.stamperlabs.upcoming4j'
-            implementationClass = 'com.stamperlabs.upcoming4j.Upcoming4jPlugin'
-        }
-    }
-}
-
 tasks.named('test') {
-    // Use JUnit Jupiter for unit tests.
     useJUnitPlatform()
 }
