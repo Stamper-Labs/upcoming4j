@@ -1,8 +1,8 @@
-package io.stamperlabs.upcoming4j
+package com.stamperlabs.upcoming4j
 
-import io.stamperlabs.upcoming4j.service.CommitHistorySinceTagService
-import io.stamperlabs.upcoming4j.service.LatestCreatedTagService
-import io.stamperlabs.upcoming4j.service.NextSemanticVersionService
+import com.stamperlabs.upcoming4j.service.CommitHistorySinceTagService
+import com.stamperlabs.upcoming4j.service.LatestCreatedTagService
+import com.stamperlabs.upcoming4j.service.NextSemanticVersionService
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 

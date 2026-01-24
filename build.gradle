@@ -6,14 +6,16 @@ plugins {
     id 'org.jreleaser' version '1.22.0'
 }
 
-apply from: 'gradle/jreleaser.gradle'
+gradle.projectsEvaluated {
+    apply from: 'gradle/jreleaser.gradle'
+}
 apply from: 'gradle/spotless.gradle'
 
 repositories {
     mavenCentral()
 }
 
-group = 'io.stamperlabs.upcoming4j'
+group = 'com.stamperlabs.upcoming4j'
 version = '0.0.1'
 
 dependencies {
@@ -24,8 +26,8 @@ dependencies {
 gradlePlugin {
     plugins {
         greeting {
-            id = 'io.stamperlabs.upcoming4j'
-            implementationClass = 'io.stamperlabs.upcoming4j.Upcoming4jPlugin'
+            id = 'com.stamperlabs.upcoming4j'
+            implementationClass = 'com.stamperlabs.upcoming4j.Upcoming4jPlugin'
         }
     }
 }

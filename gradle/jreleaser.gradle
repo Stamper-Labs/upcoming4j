@@ -4,7 +4,7 @@ jreleaser {
     authors = ['Captain Mcwiise']
     license = 'Apache-2.0'
     links {
-      homepage = 'https://stamperlabs.io/upcoming4j'
+      homepage = 'https://stamperlabs.com/upcoming4j'
     }
     versionPattern = 'SEMVER'
     inceptionYear = '2025'

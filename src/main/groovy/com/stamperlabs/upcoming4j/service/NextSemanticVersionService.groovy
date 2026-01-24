@@ -1,6 +1,6 @@
-package io.stamperlabs.upcoming4j.service
+package com.stamperlabs.upcoming4j.service
 
-import io.stamperlabs.upcoming4j.exception.Upcoming4jException
+import com.stamperlabs.upcoming4j.exception.Upcoming4jException
 import org.gradle.api.Project
 
 class NextSemanticVersionService {

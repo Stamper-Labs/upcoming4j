@@ -1,4 +1,4 @@
-package io.stamperlabs.upcoming4j.exception
+package com.stamperlabs.upcoming4j.exception
 
 import org.codehaus.groovy.GroovyException
 
