@@ -9,11 +9,11 @@ plugins {
 apply from: 'gradle/jreleaser.gradle'
 
 group = 'com.stamperlabs.upcoming4j'
-version = '0.0.4'
+version = '0.0.5'
 
 gradlePlugin {
-    website = 'https://github.com/Stamper-Labs/upcoming4j'
-    vcsUrl = 'https://github.com/Stamper-Labs/upcoming4j'
+    website = 'https://github.com/stamperlabs/upcoming4j'
+    vcsUrl = 'https://github.com/stamperlabs/upcoming4j'
     plugins {
         greeting {
             id = 'com.stamperlabs.upcoming4j'
