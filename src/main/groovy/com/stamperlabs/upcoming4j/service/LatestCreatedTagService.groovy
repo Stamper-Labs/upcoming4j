@@ -6,7 +6,6 @@ import org.gradle.api.Project
 class LatestCreatedTagService {
 
   private final Project project
-  private static final Integer EXIT_CODE_SUCCESS = 0
   private static final String GIT_TAG_REGEX = /^v\d+\.\d+\.\d+$/
 
   LatestCreatedTagService(Project project) {
@@ -32,10 +31,15 @@ class LatestCreatedTagService {
     ]
     project.logger.lifecycle("Git for each command: ${gitForEachRefCommand.join(' ')}")
 
-    String latestGitTag = project.providers.exec {
+    String latestGitTagRaw = project.providers.exec {
       commandLine "bash", "-c",
           "git for-each-ref --sort=-creatordate --format='%(refname:short)' refs/tags | head -n 1"
-    }.standardOutput.asText.get().trim()
+    }.standardOutput.asText.get()
+
+    String latestGitTag = latestGitTagRaw?.trim() ?: ""
+    if (!latestGitTag) {
+      throw new Upcoming4jException("No git tags found in the repository")
+    }
 
     if (!isTagFormatValid(latestGitTag)) {
       throw new Upcoming4jException(

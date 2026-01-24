@@ -1,5 +1,6 @@
 package com.stamperlabs.upcoming4j
 
+import com.stamperlabs.upcoming4j.exception.Upcoming4jException
 import com.stamperlabs.upcoming4j.service.CommitHistorySinceTagService
 import com.stamperlabs.upcoming4j.service.LatestCreatedTagService
 import com.stamperlabs.upcoming4j.service.NextSemanticVersionService
@@ -28,7 +29,7 @@ class Upcoming4jPlugin implements Plugin<Project> {
                 .getLogger()
                 .error(
                     "This project is not a Git repository. Please initialize Git with 'git init' before using Upcoming4j.");
-            throw new org.gradle.api.GradleException(
+            throw new Upcoming4jException(
                 "Upcoming4j requires a Git repository. Initialize Git before applying this plugin.");
         }
     }

@@ -1,17 +1,15 @@
 package com.stamperlabs.upcoming4j.service
 
-import com.stamperlabs.upcoming4j.exception.Upcoming4jException
 import org.gradle.api.Project
 
 class CommitHistorySinceTagService {
   private final Project project
-  private static final Integer EXIT_CODE_SUCCESS = 0
 
   CommitHistorySinceTagService(Project project) {
     this.project = project
   }
 
-  List<String> retrieve(String tag) throws Upcoming4jException {
+  List<String> retrieve(String tag) {
     project.logger.lifecycle("Retrieve commit history since tag: ${tag}")
 
     def gitLogCommand = ["bash", "-c", "git log ${tag}..HEAD --pretty=format:%s"]
@@ -20,16 +18,18 @@ class CommitHistorySinceTagService {
 
     String commitMessagesRaw = project.providers.exec {
       commandLine "bash", "-c", "git log ${tag}..HEAD --pretty=format:%s"
-    }.standardOutput.asText.get().trim()
+    }.standardOutput.asText.get()
 
-    if (!commitMessagesRaw) {
+    String commitMessages = commitMessagesRaw?.trim() ?: ""
+
+    if (!commitMessages) {
       project.logger.lifecycle("No commits found since tag: ${tag}")
       return []
     }
 
-    def commitMessages = commitMessagesRaw.readLines()  // safer than split('\n')
-    project.logger.lifecycle("Git log command succeeded, ${commitMessages.size()} commits found since tag: ${tag}")
+    def commitMessageList = commitMessages.readLines()  // safer than split('\n')
+    project.logger.lifecycle("Git log command succeeded, ${commitMessageList.size()} commits found since tag: ${tag}")
 
-    return commitMessages
+    return commitMessageList
   }
 }
