@@ -20,7 +20,7 @@ gradlePlugin {
             displayName = 'Upcoming4j Gradle Plugin'
             description = 'Compute the next semantic version based on conventional commits'
             tags.set(['semantic-versioning', 'conventional-commits', 'java', 'kotlin', 'versioning'])
-            implementationClass = 'com.sttamper.upcoming4j.Upcoming4jPlugin'
+            implementationClass = 'io.github.sttamper.upcoming4j.Upcoming4jPlugin'
         }
     }
 }
