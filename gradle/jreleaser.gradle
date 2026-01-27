@@ -10,7 +10,7 @@ jreleaser {
   release {
     github {
       enabled = true
-      repoOwner = 'stamperlabs'
+      repoOwner = 'sttamper'
       changelog {
         enabled = true
         formatted = 'ALWAYS'
