@@ -18,16 +18,16 @@ class NextSemanticVersionService {
       throw new Upcoming4jException("Current tag is null or empty.")
     }
 
-    def normalizedTag = normalizeTag(currentTag)
+    def currentVersionNumber = getVersionNumberFromTag(currentTag)
 
     if (!commitHistory || commitHistory.isEmpty()) {
-      project.logger.lifecycle("No commits to evaluate since '${currentTag}'. Version remains the same.")
-      return currentTag
+      project.logger.lifecycle("No commits to evaluate since tag: '${currentTag}'. Version remains the same.")
+      return currentVersionNumber
     }
 
-    def matcher = normalizedTag =~ SEMVER_TAG_REGEX
+    def matcher = currentVersionNumber =~ SEMVER_TAG_REGEX
     if (!matcher.find()) {
-      throw new Upcoming4jException("Current tag '${currentTag}' is not in semantic version format")
+      throw new Upcoming4jException("'${currentVersionNumber}' is not in semantic version format")
     }
 
     int major = matcher[0][1] as int
@@ -52,7 +52,7 @@ class NextSemanticVersionService {
     return nextVersion
   }
 
-  private String normalizeTag(String tag) {
+  private String getVersionNumberFromTag(String tag) {
     return tag.startsWith('v') ? tag.substring(1) : tag
   }
 }

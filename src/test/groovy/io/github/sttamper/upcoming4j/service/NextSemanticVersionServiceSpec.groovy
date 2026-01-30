@@ -84,9 +84,9 @@ class NextSemanticVersionServiceSpec extends Specification {
     def nextVersion = service.compute(commitHistory, currentTag)
 
     then:
-    nextVersion == "v1.2.3"
+    nextVersion == "1.2.3"
     1 * loggerMock.lifecycle("Computing next semantic version based on commit history and current tag.")
-    1 * loggerMock.lifecycle("No commits to evaluate since 'v1.2.3'. Version remains the same.")
+    1 * loggerMock.lifecycle("No commits to evaluate since tag: 'v1.2.3'. Version remains the same.")
   }
 
   def "compute should throw exception if current tag is null or empty"() {
@@ -115,6 +115,6 @@ class NextSemanticVersionServiceSpec extends Specification {
 
     then:
     def ex = thrown(Upcoming4jException)
-    ex.message == "Current tag 'version1.2' is not in semantic version format"
+    ex.message == "'ersion1.2' is not in semantic version format"
   }
 }
